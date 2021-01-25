@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     /*--
     Menu Stick
     -----------------------------------*/
@@ -14,7 +14,7 @@
             header.addClass('stick');
         }
     });
-    
+
     /*--------------------------------
         Slider active 1
     -----------------------------------*/
@@ -58,7 +58,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Slider active 2
     -----------------------------------*/
@@ -102,7 +102,7 @@
             }
         ]
     });
-    
+
     /*--
         Slider active 3
     -----------------------------------*/
@@ -129,8 +129,8 @@
             }
         ]
     });
-    
-    
+
+
     /*--------------------------------
         slider active 4
     -----------------------------------*/
@@ -174,7 +174,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Slider active 5
     -----------------------------------*/
@@ -188,8 +188,8 @@
         prevArrow: '<span class="slider-icon slider-icon-prev"><i class="icofont-simple-left"></i></span>',
         nextArrow: '<span class="slider-icon slider-icon-next"><i class="icofont-simple-right"></i></span>',
     });
-    
-    
+
+
     /*--------------------------------
         Product slider active 1
     -----------------------------------*/
@@ -238,8 +238,8 @@
             }
         ]
     });
-    
-    
+
+
     /*--------------------------------
         Product slider active 2
     -----------------------------------*/
@@ -288,8 +288,8 @@
             }
         ]
     });
-    
-    
+
+
     /*--------------------------------
         Product slider active 3
     -----------------------------------*/
@@ -338,7 +338,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Product slider active 4
     -----------------------------------*/
@@ -387,8 +387,8 @@
             }
         ]
     });
-    
-    
+
+
     /*--------------------------------
         Brand logo active
     -----------------------------------*/
@@ -437,7 +437,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Brand logo active 3
     -----------------------------------*/
@@ -486,7 +486,7 @@
             }
         ]
     });
-    
+
     /*---------------------
         Countdown 1
       --------------------- */
@@ -497,7 +497,7 @@
             $this.html(event.strftime('<span class="cdown day"> <span>%-D </span><p>Days</p></span> <span class="cdown hour"> <span> %-H</span> <p>Hours</p></span> <span class="cdown minutes"><span>%M</span> <p>Minutes</p> </span>'));
         });
     });
-    
+
     $('.timer-2 [data-countdown]').each(function() {
         var $this = $(this),
             finalDate = $(this).data('countdown');
@@ -505,7 +505,7 @@
             $this.html(event.strftime('<span class="cdown day"> <span>%-D </span><p>Day</p></span> <span class="cdown hour"> <span> %-H</span> <p>Hour</p></span> <span class="cdown minutes"><span>%M</span> <p>Minute</p> </span> <span class="cdown second"><span>%S</span> <p>Second</p> </span>'));
         });
     });
-    
+
     $('.timer-3 [data-countdown]').each(function() {
         var $this = $(this),
             finalDate = $(this).data('countdown');
@@ -513,7 +513,7 @@
             $this.html(event.strftime('<span class="cdown hour"> <span> %-H</span> <p>Hour</p></span> <span class="cdown minutes"><span>%M</span> <p>Minute</p> </span> <span class="cdown second"><span>%S</span> <p>Second</p> </span>'));
         });
     });
-    
+
     /*---------------------
         svg img color
     --------------------- */
@@ -521,12 +521,12 @@
       var mySVGsToInject = document.querySelectorAll('img.inject-me');
       // Do the injection
       SVGInjector(mySVGsToInject);
-    
-    
+
+
     /*------ Wow Active ----*/
     new WOW().init();
-    
-    
+
+
     /*------------
         ScrollUp
     ------------------ */
@@ -536,7 +536,7 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-    
+
     /*----------------------------
     	Cart Plus Minus Button
     ------------------------------ */
@@ -558,15 +558,15 @@
         }
         $button.parent().find("input").val(newVal);
     });
-    
-    
+
+
     /*------- Color active -----*/
     $('.pro-details-color-content').on('click', 'a', function(e){
         e.preventDefault();
         $(this).addClass('active').parent().siblings().children('a').removeClass('active');
     });
-    
-    
+
+
     /*--------------------------------
         Cart active
     -----------------------------------*/
@@ -592,17 +592,17 @@
             }
         });
     }
-    
+
     /* Language-dropdown */
     $(".language-dropdown-active").on("click", function(e) {
         e.preventDefault();
         $(this).parent().find('.language-dropdown').slideToggle('medium');
     })
-    
+
     /* NiceSelect */
     $('.nice-select').niceSelect();
-    
-    
+
+
     /*--------------------------------
         Testimonial active
     -----------------------------------*/
@@ -651,37 +651,37 @@
             }
         ]
     });
-    
-    
-    
-    
+
+
+
+
     /*====== SidebarCart ======*/
     function miniCart() {
         var navbarTrigger = $('.cart-active'),
             endTrigger = $('.cart-close'),
             container = $('.sidebar-cart-active'),
             wrapper2 = $('.main-wrapper');
-        
+
         wrapper2.prepend('<div class="body-overlay"></div>');
-        
+
         navbarTrigger.on('click', function(e) {
             e.preventDefault();
             container.addClass('inside');
             wrapper2.addClass('overlay-active');
         });
-        
+
         endTrigger.on('click', function() {
             container.removeClass('inside');
             wrapper2.removeClass('overlay-active');
         });
-        
+
         $('.body-overlay').on('click', function() {
             container.removeClass('inside');
             wrapper2.removeClass('overlay-active');
         });
     };
     miniCart();
-    
+
     /*-------------------------------
 	   Header Search Toggle
     -----------------------------------*/
@@ -696,35 +696,35 @@
            $(this).siblings('.search-wrap-3').addClass('open');
         }
     })
-    
-    
+
+
      /*====== Sidebar Active ======*/
     function sidebarActive() {
         var navbarTrigger = $('.sidebar-active'),
             endTrigger = $('.sidebar-close'),
             container = $('.clickalbe-sidebar-wrapper-active'),
             wrapper3 = $('.main-wrapper-2');
-        
+
         wrapper3.prepend('<div class="body-overlay-2"></div>');
-        
+
         navbarTrigger.on('click', function(e) {
             e.preventDefault();
             container.addClass('sidebar-visible');
             wrapper3.addClass('overlay-active-2');
         });
-        
+
         endTrigger.on('click', function() {
             container.removeClass('sidebar-visible');
             wrapper3.removeClass('overlay-active-2');
         });
-        
+
         $('.body-overlay-2').on('click', function() {
             container.removeClass('sidebar-visible');
             wrapper3.removeClass('overlay-active-2');
         });
     };
     sidebarActive();
-    
+
     /*====== clickable Main Menu active ======*/
     var $clickableMainMenu = $('.clickable-mainmenu-wrap'),
         $clickableSubMenu = $clickableMainMenu.find('.sub-menu-2');
@@ -746,42 +746,42 @@
             }
         }
     });
-    
-    
+
+
      /*====== Sidebar menu Active ======*/
     function mobileMenuActive() {
         var navbarTrigger = $('.mobile-menu-button-active'),
             endTrigger = $('.sidebar-close'),
             container = $('.mobile-menu-active'),
             wrapper4 = $('.main-wrapper-3');
-        
+
         wrapper4.prepend('<div class="body-overlay-3"></div>');
-        
+
         navbarTrigger.on('click', function(e) {
             e.preventDefault();
             container.addClass('sidebar-visible');
             wrapper4.addClass('overlay-active-3');
         });
-        
+
         endTrigger.on('click', function() {
             container.removeClass('sidebar-visible');
             wrapper4.removeClass('overlay-active-3');
         });
-        
+
         $('.body-overlay-3').on('click', function() {
             container.removeClass('sidebar-visible');
             wrapper4.removeClass('overlay-active-3');
         });
     };
     mobileMenuActive();
-    
+
     /*--- Language currency active ----*/
     $('.mobile-language-active').on('click', function(e) {
         e.preventDefault();
         $('.lang-dropdown-active').slideToggle(900);
     });
-    
-    
+
+
     /*------------------------------------
         Testimonial img slider active
     -----------------------------------*/
@@ -806,7 +806,7 @@
         fade: true,
         arrows: false
     });
-    
+
     /*----------------------------------------------------------
         Testimonial img slider active 3 ( home mega fashion )
     --------------------------------------------------------------*/
@@ -823,10 +823,10 @@
         fade: false,
         asNavFor: '.testimonial-active-3'
     });
-    
-    
-    
-    
+
+
+
+
     // Isotope active
     $('.grid').imagesLoaded(function() {
         // init Isotope
@@ -840,11 +840,11 @@
             }
         });
     });
-    
+
     /*--------------------------
         Isotope active
     ---------------------------- */
-    
+
     $('.grid-2').imagesLoaded(function() {
         // init Isotope
         $('.grid-2').isotope({
@@ -860,7 +860,7 @@
     /*--------------------------
         Isotope active
     ---------------------------- */
-    
+
     $('.grid-3').imagesLoaded(function() {
         // init Isotope
         $('.grid-3').isotope({
@@ -873,7 +873,7 @@
             }
         });
     });
-    
+
     /*------------------------------------
         testimonial img slider active 2
     --------------------------------------*/
@@ -926,7 +926,7 @@
         fade: true,
         arrows: false
     });
-    
+
     /*--------------------------------
         Testimonial active 5
     -----------------------------------*/
@@ -967,7 +967,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Categori slider active
     -----------------------------------*/
@@ -981,7 +981,7 @@
                 breakpoint: 1500,
                 settings: {
                     slidesToShow: 6,
-                    slidesToScroll: 1, 
+                    slidesToScroll: 1,
                 }
             },
             {
@@ -1016,8 +1016,8 @@
             }
         ]
     });
-    
-    
+
+
     /*--------------------------------
         Testimonial active 6
     -----------------------------------*/
@@ -1058,7 +1058,7 @@
             }
         ]
     });
-    
+
     /*--------------------------------
         Product img slider active
     -----------------------------------*/
@@ -1069,7 +1069,7 @@
         fade: false,
         arrows: false,
     });
-    
+
     /*--------------------------------
         Testimonial active 7
     -----------------------------------*/
@@ -1080,7 +1080,7 @@
         fade: false,
         arrows: false,
     });
-    
+
     /*--------------------------------
         Product details 3 img slider
     -----------------------------------*/
@@ -1103,46 +1103,27 @@
         fade: false,
         arrows: false,
     });
-   
-    
+
+
      /*====== SidebarSearch ======*/
     function sidebarSearch() {
         var searchTrigger = $('.search-active'),
             endTriggersearch = $('.megashop-search-close'),
             container = $('.main-search-active');
-        
+
         searchTrigger.on('click', function(e) {
             e.preventDefault();
             container.addClass('search-visible');
         });
-        
+
         endTriggersearch.on('click', function() {
             container.removeClass('search-visible');
         });
-        
+
     };
     sidebarSearch();
-    
-    /*---------------------
-        Price range
-    --------------------- */
-    var sliderrange = $('#slider-range');
-    var amountprice = $('#amount');
-    $(function() {
-        sliderrange.slider({
-            range: true,
-            min: 16,
-            max: 400,
-            values: [0, 300],
-            slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
-    });
-    
-    
+
+
     /*---------------------
         Video popup
     --------------------- */
@@ -1155,8 +1136,8 @@
             enabled: true,
         }
     });
-    
-    
+
+
     /*-------------------------------------
         checkout one click toggle function
     ---------------------------------------*/
@@ -1168,10 +1149,10 @@
         $( '.payment-box' ).slideUp(900);
         $(this).siblings( '.payment-box' ).slideToggle(900);
     });
-    
-    
+
+
     /*-----------------------
-        Shop filter active 
+        Shop filter active
     ------------------------- */
     $('.shop-filter-active').on('click', function(e) {
         e.preventDefault();
@@ -1181,10 +1162,10 @@
     shopFiltericon.on('click', function() {
         $('.shop-filter-active').toggleClass('active');
     })
-    
-    
-    
-    
+
+
+
+
     /*--
         Product details slider 2
     -----------------------------------*/
@@ -1196,7 +1177,7 @@
         fade: false,
         asNavFor: '.product-dec-slider-2',
     });
-    
+
     /*--
         Product details 2 slick carousel as Nav
     --------------------------------------------*/
@@ -1240,12 +1221,12 @@
             }
         ]
     });
-    
-    
+
+
     // Instantiate EasyZoom instances
     var $easyzoom = $('.easyzoom').easyZoom();
-    
-    
+
+
     /*--------------------------------
         Product details slider 5 active
     -----------------------------------*/
@@ -1257,7 +1238,7 @@
         fade: false,
         arrows: false,
     });
-    
+
     /*--------------------------------
         Product details tab small
     -----------------------------------*/
@@ -1278,7 +1259,7 @@
             }
         ]
     });
-    
+
     /*--------------------------
         Tab active
     ---------------------------- */
@@ -1291,9 +1272,9 @@
         $('.product-details-tab-large .tab-pane').removeClass('active');
         $('.product-details-tab-large ' + $href).addClass('active');
     })
-    
-    
-    
-    
+
+
+
+
 })(jQuery);
 

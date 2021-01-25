@@ -104,3 +104,45 @@
     font-size: 14px;
     font-weight: 600;
 }
+
+.apply-filter {
+    border: none;
+    padding: 7px 32px 7px;
+    background-color: #333333;
+    color: #fff;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.pro-details-color-content ul li a.orange{
+    background-color:#ff9210
+}
+
+.pro-details-color-content ul li a.green{
+    background-color:#7de592
+}
+
+.pro-details-color-content ul li a.yellow{
+    background-color:#ebfc2c
+}
+
+.pro-details-color-content ul li a.red{
+    background-color:#ff0a39
+}
+
+.pro-details-color-content ul li a.blue{
+    background-color:#3e8ef9
+}
+
+.pro-details-color-content ul li a.black{
+    background-color:#3a3839
+}
+
+.pro-details-color-content ul li a.grey{
+    background-color:#9c9b9b
+}
+
+.pro-details-color-content ul li a.copper{
+    background-color:#ef9353
+}
+

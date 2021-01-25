@@ -17,9 +17,10 @@ class ShopMainController extends Controller
         $perPage = $request->input('perPage') ?? 8;
         $section = null;
 
-        $products = ShopProduct::where('status', '=', 1)->with('sale')->paginate($perPage);
+        $productsAll = ShopProduct::where('status', '=', 1)->get();
         $categories = ShopCategory::all();
 
+        // wishlist
         if (Auth::user()) {
             $wishlist = UserWishlist::where('user_id', Auth::user()->id)->select('shop_product_id')->get()->toArray();
             if ($wishlist) {
@@ -32,6 +33,7 @@ class ShopMainController extends Controller
             $user_products_wishlist = [];
         }
 
+        // compare
         $compareModelsData = session()->get('modelsCompare');
         $comparePlastikData = session()->get('plastikCompare');
         if ($compareModelsData and $comparePlastikData) {
@@ -44,7 +46,17 @@ class ShopMainController extends Controller
             $compare_product_ids = [];
         }
 
-        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids'));
+        // min ans max prices
+        $minPrice = $productsAll->min('price');
+        $maxPrice = $productsAll->max('price');
+        $minPriceFilter = $request->input('minPrice') ?? $minPrice;
+        $maxPriceFilter = $request->input('maxPrice') ?? $maxPrice;
+        $products = ShopProduct::where('status', '=', 1)
+            ->whereBetween('price', [$minPriceFilter, $maxPriceFilter])
+            ->with('sale')
+            ->paginate($perPage);
+
+        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids', 'minPrice', 'maxPrice'));
     }
 
     public function section($shop_section, Request $request)
@@ -57,8 +69,9 @@ class ShopMainController extends Controller
         foreach ($categories as $category):
             array_push($list, $category->id);
         endforeach;
-        $products = ShopProduct::where('status', '=', 1)->whereIn('category_id', $list)->with('sale')->paginate($perPage);
+        $productsAll = ShopProduct::where('status', '=', 1)->whereIn('category_id', $list)->paginate($perPage);
 
+        // wishlist
         if (Auth::user()) {
             $wishlist = UserWishlist::where('user_id', Auth::user()->id)->select('shop_product_id')->get()->toArray();
             if ($wishlist) {
@@ -71,6 +84,7 @@ class ShopMainController extends Controller
             $user_products_wishlist = [];
         }
 
+        // compare
         $compareModelsData = session()->get('modelsCompare');
         $comparePlastikData = session()->get('plastikCompare');
         if ($compareModelsData and $comparePlastikData) {
@@ -83,7 +97,45 @@ class ShopMainController extends Controller
             $compare_product_ids = [];
         }
 
-        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids'));
+        // min ans max prices
+        $minPrice = $productsAll->min('price');
+        $maxPrice = $productsAll->max('price');
+        $minPriceFilter = $request->input('minPrice') ?? $minPrice;
+        $maxPriceFilter = $request->input('maxPrice') ?? $maxPrice;
+
+        //height
+        $height = $request->input('height');
+
+        //weight
+        $weight = $request->input('weight');
+
+        //color
+        $color = $request->input('color');
+
+        $products = ShopProduct::where('status', '=', 1)
+            ->where('category_id', '=', $category->id)
+            ->whereBetween('price', [$minPriceFilter, $maxPriceFilter])
+            ->when($height, function ($query, $height) {
+                if ($height == 'max') {
+                    return $query->where('height', '>=', 15);
+                } else {
+                    return $query->where('height', '<=', intval($height));
+                }
+            })
+            ->when($weight, function ($query, $weight) {
+                if ($weight == '5') {
+                    return $query->where('weight', '=', 5);
+                } else {
+                    return $query->where('weight', '=', intval($weight));
+                }
+            })
+            ->when($color, function ($query, $color) {
+                return $query->where('color', $color);
+            })
+            ->with('sale')
+            ->paginate($perPage);
+
+        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids', 'minPrice', 'maxPrice'));
     }
 
     public function category($shop_section, $shop_category, Request $request)
@@ -93,8 +145,9 @@ class ShopMainController extends Controller
         $section = ShopSection::where('slug', '=', $shop_section)->firstOrFail();
         $categories = ShopCategory::where('section_id', '=', $section->id)->get();
         $category = ShopCategory::where('slug', '=', $shop_category)->firstOrFail();
-        $products = ShopProduct::where('status', '=', 1)->where('category_id', '=', $category->id)->with('sale')->paginate($perPage);
+        $productsAll = ShopProduct::where('status', '=', 1)->where('category_id', '=', $category->id)->paginate($perPage);
 
+        // wishlist
         if (Auth::user()) {
             $wishlist = UserWishlist::where('user_id', Auth::user()->id)->select('shop_product_id')->get()->toArray();
             if ($wishlist) {
@@ -107,6 +160,7 @@ class ShopMainController extends Controller
             $user_products_wishlist = [];
         }
 
+        // compare
         $compareModelsData = session()->get('modelsCompare');
         $comparePlastikData = session()->get('plastikCompare');
         if ($compareModelsData and $comparePlastikData) {
@@ -119,6 +173,44 @@ class ShopMainController extends Controller
             $compare_product_ids = [];
         }
 
-        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids'));
+        // min ans max prices
+        $minPrice = $productsAll->min('price');
+        $maxPrice = $productsAll->max('price');
+        $minPriceFilter = $request->input('minPrice') ?? $minPrice;
+        $maxPriceFilter = $request->input('maxPrice') ?? $maxPrice;
+
+        //height
+        $height = $request->input('height');
+
+        //weight
+        $weight = $request->input('weight');
+
+        //color
+        $color = $request->input('color');
+
+        $products = ShopProduct::where('status', '=', 1)
+            ->where('category_id', '=', $category->id)
+            ->whereBetween('price', [$minPriceFilter, $maxPriceFilter])
+            ->when($height, function ($query, $height) {
+                if ($height == 'max') {
+                    return $query->where('height', '>=', 15);
+                } else {
+                    return $query->where('height', '<=', intval($height));
+                }
+            })
+            ->when($weight, function ($query, $weight) {
+                if ($weight == '5') {
+                    return$query->where('weight', '=', 5);
+                } else {
+                    return $query->where('weight', '=', intval($weight));
+                }
+            })
+            ->when($color, function ($query, $color) {
+                return $query->where('color', $color);
+            })
+            ->with('sale')
+            ->paginate($perPage);
+
+        return view('shop.index', compact('categories', 'products', 'perPage', 'section', 'user_products_wishlist', 'compare_product_ids', 'minPrice', 'maxPrice'));
     }
 }

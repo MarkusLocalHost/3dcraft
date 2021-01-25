@@ -27,7 +27,8 @@ class CreateShopProductsTable extends Migration
             $table->string('keywords');
             $table->string('description');
 
-            $table->integer('size')->nullable()->unsigned();
+            $table->integer('height')->nullable()->unsigned();
+            $table->integer('weight')->nullable()->unsigned();
             $table->string('color')->nullable();
             $table->string('brand')->nullable();
 
